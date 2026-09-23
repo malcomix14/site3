@@ -98,9 +98,9 @@ const SHOTS: Shot[] = [
   { at: 50.0, pos: M(-7, 15, 13), look: M(1.5, 1.0, -2), fov: 32, near: 0.001, shake: 0.012, attach: 1, parallax: 0.0006 },
   // deconstruction — camera pulls back and orbits the exploded assembly
   { at: 51.6, pos: M(-26, 44, 88), look: M(0, 4, 0), fov: 32, near: 0.002, shake: 0.012, attach: 1, parallax: 0.001 },
-  { at: 53.4, pos: M(60, 42, 150), look: M(0, 0, 0), fov: 32, near: 0.003, shake: 0.012, attach: 1, parallax: 0.002 },
-  { at: 55.2, pos: M(165, 14, 58), look: M(0, -4, 0), fov: 32, near: 0.003, shake: 0.012, attach: 1, parallax: 0.002 },
-  { at: 57.0, pos: M(120, -34, -118), look: M(0, -10, 0), fov: 32, near: 0.003, shake: 0.012, attach: 1, parallax: 0.002 },
+  { at: 53.4, pos: M(56, 34, 142), look: M(0, -4, 0), fov: 32, near: 0.003, shake: 0.012, attach: 1, parallax: 0.002 },
+  { at: 55.2, pos: M(150, 10, 58), look: M(0, -5, 0), fov: 32, near: 0.003, shake: 0.012, attach: 1, parallax: 0.002 },
+  { at: 57.0, pos: M(108, -30, -110), look: M(0, -10, 0), fov: 32, near: 0.003, shake: 0.012, attach: 1, parallax: 0.002 },
   { at: 58.6, pos: M(-30, -2, -120), look: M(0, -12, 0), fov: 34, near: 0.002, shake: 0.01, attach: 1, parallax: 0.001 },
   // into the heart of the movement
   { at: 60.2, pos: M(-30, -12.5, -34), look: M(0, -14, 0), fov: 38, near: 0.0006, shake: 0.008, attach: 1, parallax: 0.0004 },

@@ -152,6 +152,10 @@ export function buildHotelExterior(M: Materials, env: Environments, tx: Textures
   bx(a, E.limestone, 29.8, top, 3.4, 44.2, top + 0.06, 3.6);
   // loungers on the terrace
   for (let i = 0; i < 3; i++) lounger(a, { x: 22.5 + i * 2.1, y: top, z: 2.4, ry: Math.PI }, { frame: E.teakExt, cushion: E.cushion });
+  for (let i = 0; i < 2; i++) lounger(a, { x: 50.2 + i * 2.1, y: top, z: 2.2, ry: Math.PI }, { frame: E.teakExt, cushion: E.cushion });
+  umbrella(a, { x: 53.8, y: top, z: 1.6 }, { pole: E.bronze, canopy: E.umbrella, base: E.limestone });
+  planter(a, { x: 44.9, y: top, z: 0.2 }, { mat: E.limestone, soil: M.int.soil, w: 1.2, d: 1.2, h: 0.55, round: true });
+  a.put(indoorTreeGeometry(501, 2.3, '#62734f'), E.foliageNear, 44.9, top + 0.5, 0.2);
 
   // ---------------------------------------------------------------- ground floor wings (spa / restaurant)
   bx(a, E.concrete, L.x1 + 0.6, 29.7, 3.5, WING_X1, 30.0, 22);

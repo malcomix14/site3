@@ -190,9 +190,9 @@ export function WorldScene() {
       envI: 0.35,
       vertexColors: true,
       roughness: 0.94,
-      maps: { normalMap: textures.rock.normalMap },
-      ns: 1.0,
-      tile: 42,
+      maps: { normalMap: textures.concrete.normalMap },
+      ns: 1.4,
+      tile: 5,
       far: true,
     });
     const terrain = new Mesh(buildTerrain(), terrainMat);

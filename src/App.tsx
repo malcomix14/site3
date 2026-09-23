@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import { useEffect, useRef, useState } from 'react';
+import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import { NoToneMapping, PCFShadowMap, SRGBColorSpace } from 'three';
 import { QUALITY } from './config/quality';
 import { Experience } from './engine/Experience';
@@ -66,7 +66,7 @@ export function App() {
       <div
         ref={track}
         className="scroll-track"
-        style={{ height: `calc(${JOURNEY_LENGTH + 1} * 72lvh)` }}
+        style={{ '--units': JOURNEY_LENGTH + 1 } as CSSProperties}
         aria-hidden="true"
       />
       <Intro />

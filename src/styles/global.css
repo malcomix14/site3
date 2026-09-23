@@ -81,6 +81,12 @@ a:focus-visible {
   z-index: 1;
   width: 100%;
   pointer-events: none;
+  height: calc(var(--units, 65) * 72vh);
+}
+@supports (height: 1lvh) {
+  .scroll-track {
+    height: calc(var(--units, 65) * 72lvh);
+  }
 }
 
 /* ---------------------------------------------------------- chrome */
@@ -532,7 +538,14 @@ a:focus-visible {
 }
 @media (max-width: 640px) {
   .label__text {
-    font-size: 8px;
+    font-size: 7.5px;
+    letter-spacing: 0.22em;
+  }
+  .intro {
+    padding-bottom: calc(var(--gutter) * 1.9 + 76px);
+  }
+  .intro__hint {
+    bottom: calc(var(--gutter) * 1.9 + 52px);
   }
   .label__text em {
     display: none;

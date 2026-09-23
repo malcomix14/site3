@@ -143,7 +143,7 @@ export function createMaterials(tx: Textures, env: Environments) {
     marbleWall: std({ env: E.interior, envI: 0.8, maps: tx.marbleWhite, tile: 2.2, roughness: 1 }),
     marbleDark: phys({ env: E.interior, envI: 1.0, maps: tx.marbleDark, tile: 2.0, roughness: 1, clearcoat: 0.6, clearcoatRoughness: 0.08 }),
     travertine: std({ env: E.interior, envI: 0.65, maps: tx.travertine, tile: 1.6, roughness: 1, ns: 0.8 }),
-    stoneGrey: std({ env: E.interior, envI: 0.75, maps: tx.stoneGrey, tile: 2.0, roughness: 1 }),
+    stoneGrey: std({ env: E.interior, envI: 0.75, maps: tx.stoneGrey, tile: 2.0, roughness: 1, ns: 0.4 }),
     oak: std({ env: E.interior, envI: 0.75, maps: tx.oak, tile: 2.4, roughness: 1, ns: 0.6 }),
     oakLight: std({ env: E.interior, envI: 0.6, maps: tx.oak, tile: 3.6, color: '#f1e6d6', roughness: 1 }),
     walnut: phys({ env: E.interior, envI: 0.8, maps: tx.walnut, tile: 1.4, roughness: 1, clearcoat: 0.35, clearcoatRoughness: 0.2 }),
@@ -229,6 +229,7 @@ export function createMaterials(tx: Textures, env: Environments) {
     wing: std({ env: E.sky, envI: 0.9, maps: tx.panelLines, tile: 2.5, color: '#b9bec4', roughness: 0.34, metalness: 0.25, ns: 0.6, side: DoubleSide }),
     wingDark: std({ env: E.sky, envI: 0.9, color: '#9ea3a8', roughness: 0.3, metalness: 0.6 }),
     navLight: emissive('#ff2a1a', 12),
+    ledLine: emissive('#ffcf9a', 0.55),
     strobe: emissive('#ffffff', 20),
   };
 

@@ -121,7 +121,7 @@ function paneMaterial(env: Texture, data: Texture, normal: Texture, frostAmount:
          float drops = cond.g;
          float gA = clamp(diffuseColor.a + frost * 0.3 + drops * 0.03 + cond.b * 0.08, 0.0, 1.0);
          vec3 frostCol = totalDiffuse * 0.12 + vec3(0.78, 0.84, 0.92) * frost * 0.75;
-         gl_FragColor = vec4(frostCol * gA + totalSpecular * (0.35 + drops * 0.25), gA);`,
+         gl_FragColor = vec4(frostCol * gA + reflectedLight.indirectSpecular * (0.3 + drops * 0.12), gA);`,
       )
       .replace('#include <premultiplied_alpha_fragment>', '');
   };
@@ -232,7 +232,7 @@ export function WindowScene() {
     // walnut ledge with a warm LED line beneath
     const ledge = rbox(3.6, 0.05, 0.2, 0.02);
     a.put(ledge, C.wood, 0, -0.52, zPanel - 0.12);
-    const led = new Mesh(rbox(3.5, 0.008, 0.01, 0.003), mats.int.ledWarm);
+    const led = new Mesh(rbox(3.5, 0.008, 0.01, 0.003), mats.cabin.ledLine);
     led.position.set(0, -0.552, zPanel - 0.06);
     root.add(led);
     // cove light at the top

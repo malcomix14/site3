@@ -105,17 +105,19 @@ export function WatchLabels() {
       el.style.visibility = o < 0.01 ? 'hidden' : 'visible';
       if (o < 0.01) return;
       el.style.transform = `translate3d(${l.x.toFixed(1)}px, ${l.y.toFixed(1)}px, 0)`;
-      const len = (narrow ? 42 : 90) * stagger;
+      const len = (narrow ? 28 : 90) * stagger;
+      // on narrow screens every call-out sits on the open side, clamped to the viewport
+      const side = narrow ? (l.x > window.innerWidth * 0.62 ? -1 : 1) : l.side;
       const line = el.querySelector<HTMLElement>('.label__line');
       const text = el.querySelector<HTMLElement>('.label__text');
       if (line) {
         line.style.width = `${len}px`;
-        line.style.transform = l.side > 0 ? 'rotate(0deg)' : 'rotate(180deg)';
+        line.style.transform = side > 0 ? 'rotate(0deg)' : 'rotate(180deg)';
       }
       if (text) {
         text.style.transform =
-          l.side > 0 ? `translate(${len + 12}px, -50%)` : `translate(calc(-100% - ${len + 12}px), -50%)`;
-        text.style.textAlign = l.side > 0 ? 'left' : 'right';
+          side > 0 ? `translate(${len + 10}px, -50%)` : `translate(calc(-100% - ${len + 10}px), -50%)`;
+        text.style.textAlign = side > 0 ? 'left' : 'right';
       }
     });
   });

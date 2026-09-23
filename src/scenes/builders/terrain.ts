@@ -11,16 +11,18 @@ export const RESORT_X1 = 95;
 export const RESORT_Z1 = 90;
 
 export function coastZ(x: number) {
+  const jag = 2.2 * Math.sin(x * 0.21 + 1.0) + 1.3 * Math.sin(x * 0.47 + 2.3) + 0.7 * Math.sin(x * 1.13);
   const wild = -40 + 95 * Math.sin(x * 0.0031 + 1.9) + 34 * Math.sin(x * 0.0093 + 0.4) + 11 * Math.sin(x * 0.031 + 2.0) + 4 * Math.sin(x * 0.083);
   const m = smooth(RESORT_X0 - 90, RESORT_X0, x) * (1 - smooth(RESORT_X1, RESORT_X1 + 110, x));
-  return wild + (CLIFF_EDGE_Z - wild) * m;
+  return wild + (CLIFF_EDGE_Z - wild) * m + jag * (1 - 0.6 * m);
 }
 
 export const COAST_GLSL = /* glsl */ `
 float coastZ(float x) {
+  float jag = 2.2 * sin(x * 0.21 + 1.0) + 1.3 * sin(x * 0.47 + 2.3) + 0.7 * sin(x * 1.13);
   float wild = -40.0 + 95.0 * sin(x * 0.0031 + 1.9) + 34.0 * sin(x * 0.0093 + 0.4) + 11.0 * sin(x * 0.031 + 2.0) + 4.0 * sin(x * 0.083);
   float m = smoothstep(${(RESORT_X0 - 90).toFixed(1)}, ${RESORT_X0.toFixed(1)}, x) * (1.0 - smoothstep(${RESORT_X1.toFixed(1)}, ${(RESORT_X1 + 110).toFixed(1)}, x));
-  return mix(wild, ${CLIFF_EDGE_Z.toFixed(1)}, m);
+  return mix(wild, ${CLIFF_EDGE_Z.toFixed(1)}, m) + jag * (1.0 - 0.6 * m);
 }
 `;
 
@@ -40,7 +42,7 @@ export function terrainHeight(x: number, z: number) {
     h = -2.5 + d * 0.35 + fbm(x * 0.02, z * 0.02, 3) * 2;
   } else {
     const rise = Math.pow(smooth(0, 9 + 6 * (fbm(x * 0.01, 7.7, 2) * 0.5 + 0.5), d), 0.55);
-    const rock = ridged(x * 0.03, z * 0.03, 4) * 4 * (1 - smooth(10, 40, d));
+    const rock = ridged(x * 0.03, z * 0.03, 4) * 4 * (1 - smooth(10, 40, d)) + ridged(x * 0.18, z * 0.18 + 3, 3) * 1.6 * (1 - smooth(4, 14, d));
     h = -2.5 + (cliffTop + 2.5) * rise + rock;
     // rolling hinterland
     const hills = (fbm(x * 0.0021 + 11, z * 0.0021 + 3, 5) * 0.5 + 0.5) * 230 * smooth(80, 900, d);

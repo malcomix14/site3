@@ -150,8 +150,8 @@ vec3 albedo(vec2 uv) {
   c *= 0.93 + grain * 0.12;
   return mix(c, S(0.62, 0.6, 0.58), vein);
 }`,
-  orm: `float rough(vec2 uv) { return 0.38 + 0.08 * pnoise(uv * 6.0, vec2(6.0)); }`,
-  normal: `float height(vec2 uv) { return pfbm(uv * 20.0, vec2(20.0), 4) * 0.05; }`,
+  orm: `float rough(vec2 uv) { return 0.42 + 0.025 * pnoise(uv * 6.0, vec2(6.0)); }`,
+  normal: `float height(vec2 uv) { return pfbm(uv * 40.0, vec2(40.0), 3) * 0.03; }`,
 };
 
 // ------------------------------------------------------------------ wood

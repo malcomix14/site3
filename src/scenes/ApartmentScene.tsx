@@ -153,7 +153,7 @@ export function ApartmentScene() {
     armchair(a, { x: -6.3, y: F, z: 16.8, ry: Math.PI }, { fabric: I.leatherCognac, frame: I.walnut });
     bookStack(a, { x: -6.0, y: F + 0.32, z: 13.6, ry: 0.3 }, { mat: I.books, n: 3 });
     vase(a, { x: -6.3, y: F + 0.32, z: 14.5 }, { mat: I.darkCeramic, h: 0.36, r: 0.11 });
-    floorLamp(a, { x: -2.6, y: F, z: 16.4 }, { metal: I.brass, shade: I.lampShade, h: 1.7 });
+    floorLamp(a, { x: -3.55, y: F, z: 16.35 }, { metal: I.brass, shade: I.lampShade, h: 1.7 });
     sideTable(a, { x: -2.7, y: F, z: 11.8 }, { top: I.marbleDark, leg: I.brass });
     // sideboard & art on the back wall
     bx(a, I.walnut, 3.2, F + 0.12, ZB - 0.55, 9.8, F + 0.78, ZB - 0.05);
