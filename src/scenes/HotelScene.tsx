@@ -43,7 +43,7 @@ export function HotelScene() {
   }, [mats, env, textures, quality]);
 
   useVisibleRange(built.exterior.root, -1, 41.5);
-  useVisibleRange(built.lobby.root, 10.5, 20.6);
+  useVisibleRange(built.lobby.root, 10.5, 20.3);
 
   useFrame(() => {
     const t = journey.time;

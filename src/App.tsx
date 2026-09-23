@@ -66,7 +66,7 @@ export function App() {
       <div
         ref={track}
         className="scroll-track"
-        style={{ height: `calc(${JOURNEY_LENGTH + 1} * 100lvh)` }}
+        style={{ height: `calc(${JOURNEY_LENGTH + 1} * 72lvh)` }}
         aria-hidden="true"
       />
       <Intro />

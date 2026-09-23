@@ -95,7 +95,7 @@ export function evaluateRig(progress: number, time: number, pointerX: number, po
   rig.quaternion.copy(_q);
   rig.fov = fov;
   rig.near = near;
-  rig.far = Math.min(40000, near * 90000);
+  rig.far = Math.min(60000, near * 250000);
   rig.focus = Math.exp(T.logFocus.evaluate(progress));
   rig.shake = shake;
   rig.attach = attach;

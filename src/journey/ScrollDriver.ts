@@ -15,7 +15,7 @@ export function createScrollDriver(track: HTMLElement) {
   const lenis = new Lenis({
     lerp: 0.085,
     smoothWheel: true,
-    wheelMultiplier: 0.85,
+    wheelMultiplier: 1.0,
     touchMultiplier: 1.35,
     syncTouch: false,
   });
@@ -34,7 +34,7 @@ export function createScrollDriver(track: HTMLElement) {
     },
   });
 
-  // Lock scrolling until the journey has loaded and the visitor entered.
+  // Lock scrolling until the journey has loaded.
   lenis.stop();
   document.documentElement.classList.add('is-locked');
 
@@ -55,9 +55,10 @@ export function createScrollDriver(track: HTMLElement) {
 
   const unsub = uiStore.subscribe(() => {
     const s = uiStore.get();
-    if (s.ready && s.entered) {
+    if (s.ready && document.documentElement.classList.contains('is-locked')) {
       document.documentElement.classList.remove('is-locked');
       lenis.start();
+      ScrollTrigger.refresh();
     }
   });
 

@@ -11,14 +11,14 @@ export const RESORT_X1 = 95;
 export const RESORT_Z1 = 90;
 
 export function coastZ(x: number) {
-  const wild = -26 + 34 * Math.sin(x * 0.0043 + 1.3) + 15 * Math.sin(x * 0.0127 + 0.4) + 5 * Math.sin(x * 0.041 + 2.0);
+  const wild = -40 + 95 * Math.sin(x * 0.0031 + 1.9) + 34 * Math.sin(x * 0.0093 + 0.4) + 11 * Math.sin(x * 0.031 + 2.0) + 4 * Math.sin(x * 0.083);
   const m = smooth(RESORT_X0 - 90, RESORT_X0, x) * (1 - smooth(RESORT_X1, RESORT_X1 + 110, x));
   return wild + (CLIFF_EDGE_Z - wild) * m;
 }
 
 export const COAST_GLSL = /* glsl */ `
 float coastZ(float x) {
-  float wild = -26.0 + 34.0 * sin(x * 0.0043 + 1.3) + 15.0 * sin(x * 0.0127 + 0.4) + 5.0 * sin(x * 0.041 + 2.0);
+  float wild = -40.0 + 95.0 * sin(x * 0.0031 + 1.9) + 34.0 * sin(x * 0.0093 + 0.4) + 11.0 * sin(x * 0.031 + 2.0) + 4.0 * sin(x * 0.083);
   float m = smoothstep(${(RESORT_X0 - 90).toFixed(1)}, ${RESORT_X0.toFixed(1)}, x) * (1.0 - smoothstep(${RESORT_X1.toFixed(1)}, ${(RESORT_X1 + 110).toFixed(1)}, x));
   return mix(wild, ${CLIFF_EDGE_Z.toFixed(1)}, m);
 }

@@ -54,8 +54,8 @@ export const UPPER_FLOORS = [38.6, 42.6, 46.6] as const; // guest levels (floor 
 
 // ---------------------------------------------------------------- yacht
 export const YACHT_POSITION = new Vector3(40, 0, -470);
-/** Yaw of the yacht group. Local bow = −X, local port = +Z. */
-export const YACHT_YAW = -0.34;
+/** Yaw of the yacht group (stern toward the sun). Local bow = −X, local port = +Z. */
+export const YACHT_YAW = 2.0;
 export const YACHT_DECK_Y = 2.1; // main deck floor, local
 export const YACHT_REST = new Matrix4().compose(
   YACHT_POSITION,

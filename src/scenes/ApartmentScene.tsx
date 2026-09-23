@@ -326,7 +326,8 @@ export function ApartmentScene() {
     return { root, bayL, bayR, beams, dust };
   }, [mats, env, textures, quality]);
 
-  useVisibleRange(built.root, 11, 38);
+  // seen from outside during the approach, then from the moment the lift arrives
+  useVisibleRange(built.root, 10.5, 15.2, [21.3, 38]);
 
   useFrame(() => {
     const k = journey.cues.bayWindow;

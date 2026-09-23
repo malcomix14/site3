@@ -9,7 +9,7 @@ import { SUN_DIRECTION } from '../journey/layout';
  */
 export const ATMOS = {
   uAtmosSky: { value: null as CubeTexture | Texture | null },
-  uAtmosDensity: { value: 1.35e-4 },
+  uAtmosDensity: { value: 0.95e-4 },
   uAtmosFalloff: { value: 1 / 300 },
   uAtmosStrength: { value: 1 },
   uAtmosTint: { value: new Color(1, 1, 1) },
@@ -78,7 +78,7 @@ export function withAtmosphere<T extends Material>(material: T, opts: AtmosOptio
             aw = instanceMatrix * aw;
           #endif
           vAtmosWorld = (modelMatrix * aw).xyz;
-          ${opts.clampFar ? 'gl_Position.z = min(gl_Position.z, gl_Position.w * 0.999995);' : ''}
+          ${opts.clampFar ? 'gl_Position.z = min(gl_Position.z, gl_Position.w * 0.99999);' : ''}
         }`,
       );
     shader.fragmentShader = shader.fragmentShader

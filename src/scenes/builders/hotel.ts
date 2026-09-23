@@ -44,7 +44,6 @@ export function buildHotelExterior(M: Materials, env: Environments, tx: Textures
 
   // ---------------------------------------------------------------- pool deck over the cliff
   const deckTop = 30;
-  bx(a, E.limestone, -27, 22, -14.6, 27, deckTop - 0.1, -11.8); // retaining wall into the cliff
   bx(a, E.limestone, -27, deckTop - 1.4, -14.6, 27, deckTop - 0.1, 0);
   // paving around the pool (pool: x ±16, z −12.6..−3.4)
   bx(a, E.paving, -27, deckTop - 0.1, -3.4, 27, deckTop, 0);
@@ -120,7 +119,7 @@ export function buildHotelExterior(M: Materials, env: Environments, tx: Textures
     }
     // planters with cascading greenery
     for (let x = WING_X0 + 2.2; x < WING_X1 - 1; x += 4.3) {
-      if (rnd() < 0.45) continue;
+      if (rnd() < 0.62) continue;
       bx(a, E.concrete, x - 1.4, yf, -0.7, x + 1.4, yf + 0.45, -0.1);
       const sh = shrubGeometry(Math.floor(rnd() * 100), '#4f5f3a');
       a.put(sh, E.foliageNear, x, yf + 0.25, -0.4, { sx: 1.1, sy: 0.55, sz: 0.35, ry: rnd() * 6 });

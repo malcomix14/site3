@@ -24,14 +24,30 @@ import { cypressGeometry, shrubGeometry, stonePineGeometry } from './builders/ve
 import { visibilityOverride } from './useVisibleRange';
 
 // ---------------------------------------------------------------- terrain
+/** Row positions: coarse offshore, very fine along the coastline and cliffs, stretching inland. */
+function terrainRows(): number[] {
+  const rows: number[] = [];
+  for (let z = -160; z < -34; z += 6) rows.push(z);
+  for (let z = -34; z < 70; z += 0.9) rows.push(z);
+  let z = 70;
+  let step = 1.2;
+  while (z < 3600) {
+    rows.push(z);
+    z += step;
+    step *= 1.045;
+  }
+  rows.push(3600);
+  return rows;
+}
+
 function buildTerrain(): BufferGeometry {
   const NX = 340;
-  const NZ = 250;
+  const rows = terrainRows();
+  const NZ = rows.length;
   const pos = new Float32Array(NX * NZ * 3);
   const col = new Float32Array(NX * NZ * 3);
   for (let j = 0; j < NZ; j++) {
-    const v = j / (NZ - 1);
-    const z = -140 + Math.pow(v, 1.9) * 3600;
+    const z = rows[j];
     for (let i = 0; i < NX; i++) {
       const u = (i / (NX - 1)) * 2 - 1;
       const x = 15 + Math.sign(u) * Math.pow(Math.abs(u), 1.75) * 3400;
@@ -56,12 +72,13 @@ function buildTerrain(): BufferGeometry {
   g.setIndex(idx);
   g.computeVertexNormals();
   const nor = g.getAttribute('normal');
-  const rock = new Color('#b5a58c');
-  const rockDark = new Color('#7d705f');
-  const scrub = new Color('#4b5534');
-  const dry = new Color('#9a8d62');
+  const rock = new Color('#c2b8a6');
+  const rockDark = new Color('#857a6b');
+  const scrub = new Color('#3c4829');
+  const dry = new Color('#77744c');
   const lawn = new Color('#5f7440');
   const sand = new Color('#cdbd9c');
+  const wet = new Color('#4a4238');
   const c = new Color();
   for (let i = 0; i < NX * NZ; i++) {
     const x = pos[i * 3];
@@ -72,10 +89,16 @@ function buildTerrain(): BufferGeometry {
     const n = fbm(x * 0.012, z * 0.012, 4) * 0.5 + 0.5;
     const n2 = fbm(x * 0.05 + 3, z * 0.05, 3) * 0.5 + 0.5;
     c.copy(scrub).lerp(dry, smooth(0.35, 0.75, n) * 0.8);
-    c.lerp(rock, smooth(0.18, 0.42, slope + (n2 - 0.5) * 0.2));
-    c.lerp(rockDark, smooth(0.5, 0.9, slope) * 0.5);
+    const rockK = smooth(0.18, 0.42, slope + (n2 - 0.5) * 0.2);
+    // layered limestone strata and vertical erosion streaks on the cliffs
+    const strata = 0.5 + 0.5 * Math.sin(y * 0.9 + fbm(x * 0.03, z * 0.03, 2) * 3);
+    const streak = fbm(x * 0.35, y * 0.02, 2) * 0.5 + 0.5;
+    c.lerp(rock, rockK);
+    c.lerp(rockDark, rockK * (0.25 + 0.35 * strata) * (0.6 + streak * 0.6));
+    c.lerp(rockDark, smooth(0.5, 0.9, slope) * 0.35);
     const d = z - coastZ(x);
-    if (y < 1.8 && d > -30) c.lerp(sand, 0.6);
+    if (y < 1.8 && d > -30 && slope < 0.5) c.lerp(sand, 0.55);
+    if (y < 2.2 && slope > 0.3) c.lerp(wet, 0.7);
     if (y < 0) c.multiplyScalar(0.6);
     const rm = resortMask(x, z);
     if (rm > 0.5 && y > 25) c.lerp(lawn, smooth(0.5, 1, rm) * (0.6 + n2 * 0.4));
@@ -100,7 +123,7 @@ function scatterVegetation(counts: { pines: number; cypress: number; shrubs: num
     while (list.length < target && tries < target * 30) {
       tries++;
       const x = 15 + (rnd() * 2 - 1) * spread;
-      const z = -40 + Math.pow(rnd(), 1.6) * 2200;
+      const z = -40 + Math.pow(rnd(), 2.3) * 2400;
       const y = terrainHeight(x, z);
       if (y < 3) continue;
       const e = 1.5;
@@ -167,25 +190,25 @@ export function WorldScene() {
       envI: 0.35,
       vertexColors: true,
       roughness: 0.94,
-      maps: { map: textures.rock.map, normalMap: textures.rock.normalMap },
-      ns: 1.2,
-      tile: 16,
+      maps: { normalMap: textures.rock.normalMap },
+      ns: 1.0,
+      tile: 42,
       far: true,
     });
     const terrain = new Mesh(buildTerrain(), terrainMat);
     terrain.receiveShadow = true;
-    terrain.castShadow = true;
+    terrain.castShadow = false;
     terrain.name = 'terrain';
     group.add(terrain);
 
     // vegetation
     const k = quality.trees;
-    const veg = scatterVegetation({ pines: Math.round(700 * k), cypress: Math.round(320 * k), shrubs: Math.round(1500 * k) });
+    const veg = scatterVegetation({ pines: Math.round(1400 * k), cypress: Math.round(480 * k), shrubs: Math.round(3600 * k) });
     const pineGeo = stonePineGeometry(3);
     const cypGeo = cypressGeometry(5);
     const shrubGeo = shrubGeometry(9);
-    group.add(instanced(pineGeo, mats.ext.foliage, veg.pines, true));
-    group.add(instanced(cypGeo, mats.ext.foliage, veg.cypress, true));
+    group.add(instanced(pineGeo, mats.ext.foliage, veg.pines, false));
+    group.add(instanced(cypGeo, mats.ext.foliage, veg.cypress, false));
     group.add(instanced(shrubGeo, mats.ext.foliage, veg.shrubs, false));
 
     return { group, sky, ocean, oceanMat };

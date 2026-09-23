@@ -9,11 +9,11 @@ export const visibilityOverride = { all: false };
  * Keeps an object visible only while the journey is inside [from, to].
  * Distant chapters cost nothing: they are simply not drawn.
  */
-export function useVisibleRange(obj: Object3D | null | undefined, from: number, to: number) {
+export function useVisibleRange(obj: Object3D | null | undefined, from: number, to: number, also?: [number, number]) {
   useFrame(() => {
     if (!obj) return;
     const p = journey.progress;
-    obj.visible = visibilityOverride.all || (p >= from && p <= to);
+    obj.visible = visibilityOverride.all || (p >= from && p <= to) || (!!also && p >= also[0] && p <= also[1]);
   }, -5);
 }
 

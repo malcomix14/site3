@@ -103,7 +103,7 @@ export function PostFX() {
     }
     const blur = c.motionBlur * speed * forward;
     fx.lens.blur = blur;
-    fx.lens.aberration = 0.012 + blur * 0.05;
+    fx.lens.aberration = 0.005 + blur * 0.05;
 
     // depth of field
     const bokeh = QUALITY.dof ? c.bokeh : 0;

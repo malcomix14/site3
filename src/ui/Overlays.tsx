@@ -157,7 +157,10 @@ export function Finale() {
     if (title.current) {
       // very slow tracking-in while the movement keeps running
       const t = smoothstep(FINALE.from, JOURNEY_LENGTH, p);
-      title.current.style.letterSpacing = `${(0.62 - t * 0.4 + Math.sin(journey.time * 0.2) * 0.004).toFixed(3)}em`;
+      const narrow = window.innerWidth < 700;
+      const from = narrow ? 0.34 : 0.62;
+      const range = narrow ? 0.16 : 0.4;
+      title.current.style.letterSpacing = `${(from - t * range + Math.sin(journey.time * 0.2) * 0.004).toFixed(3)}em`;
       title.current.style.paddingLeft = title.current.style.letterSpacing;
     }
     const s = smoothstep(FINALE.full - 0.4, FINALE.full + 0.6, p);

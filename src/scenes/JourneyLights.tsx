@@ -40,7 +40,7 @@ const yachtPoint = (x: number, y: number, z: number) => (out: Vector3) =>
   out.set(x, y, z).applyMatrix4(yachtSwell.matrix);
 
 const PRACTICALS_A: Practical[] = [
-  { from: -2, to: 4.0, pos: (o) => o.copy(WINDOW_CENTER).add(_w.set(0.0, 0.02, -0.07)), color: '#e4ecff', intensity: 0.09, distance: 2.6 },
+  { from: -2, to: 4.0, pos: (o) => o.copy(WINDOW_CENTER).add(_w.set(0.0, 0.02, -0.07)), color: '#e4ecff', intensity: 0.05, distance: 2.4 },
   { from: 13.2, to: 18.9, pos: (o) => o.set(0, 35.4, 10.5), color: '#ffc98e', intensity: 38, distance: 30 },
   { from: 22.3, to: 26.2, pos: (o) => o.set(-9.0, 51.3, 13.2), color: '#ff9b52', intensity: 9, distance: 12, flicker: true },
   { from: 28.4, to: 31.6, pos: (o) => o.set(35.4, 51.6, 22.2), color: '#ffc68a', intensity: 3.5, distance: 8 },

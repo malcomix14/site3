@@ -68,7 +68,7 @@ export function stonePineGeometry(seed = 3) {
   for (let i = 0; i < 6; i++) {
     const a = (i / 6) * Math.PI * 2 + rnd();
     const r = i === 0 ? 0 : 1.8 + rnd() * 1.2;
-    const b = blob(1.9 + rnd() * 0.9, 1, 1.35, 0.42, 1.35, seed + i * 7);
+    const b = blob(1.9 + rnd() * 0.9, 0, 1.35, 0.42, 1.35, seed + i * 7);
     b.translate(Math.cos(a) * r + lean * 1.6, crownY + rnd() * 0.5 + (i === 0 ? 0.6 : 0), Math.sin(a) * r);
     parts.push(paint(b, new Color('#2f4424').offsetHSL((rnd() - 0.5) * 0.02, 0, (rnd() - 0.5) * 0.05), 0.35, seed + i));
   }
@@ -105,8 +105,8 @@ export function cypressGeometry(seed = 5) {
 export function shrubGeometry(seed = 9, color = '#5b6645') {
   const rnd = mulberry32(seed);
   const parts: BufferGeometry[] = [];
-  for (let i = 0; i < 4; i++) {
-    const b = blob(0.9 + rnd() * 0.5, 1, 1.1, 0.8, 1.1, seed + i * 3, 0.35);
+  for (let i = 0; i < 3; i++) {
+    const b = blob(0.9 + rnd() * 0.5, 0, 1.1, 0.8, 1.1, seed + i * 3, 0.35);
     b.translate((rnd() - 0.5) * 1.4, 0.6 + rnd() * 0.4, (rnd() - 0.5) * 1.4);
     parts.push(strip(paint(b, new Color(color).offsetHSL(0, 0, (rnd() - 0.5) * 0.06), 0.3, seed + i)));
   }

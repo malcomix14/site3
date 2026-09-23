@@ -108,7 +108,7 @@ function paneMaterial(env: Texture, data: Texture, normal: Texture, frostAmount:
     envMap: env,
     envMapIntensity: 1.2,
   });
-  m.normalScale.set(0.9, 0.9);
+  m.normalScale.set(0.45, 0.45);
   m.onBeforeCompile = (shader) => {
     shader.uniforms.uCond = { value: data };
     shader.uniforms.uFrost = { value: frostAmount };
@@ -119,9 +119,9 @@ function paneMaterial(env: Texture, data: Texture, normal: Texture, frostAmount:
         `vec4 cond = texture2D(uCond, vNormalMapUv);
          float frost = cond.r * uFrost;
          float drops = cond.g;
-         float gA = clamp(diffuseColor.a + frost * 0.32 + drops * 0.05 + cond.b * 0.12, 0.0, 1.0);
-         vec3 frostCol = totalDiffuse * 0.15 + vec3(0.78, 0.84, 0.92) * frost * 0.9;
-         gl_FragColor = vec4(frostCol * gA + totalSpecular * (0.6 + drops * 1.2), gA);`,
+         float gA = clamp(diffuseColor.a + frost * 0.3 + drops * 0.03 + cond.b * 0.08, 0.0, 1.0);
+         vec3 frostCol = totalDiffuse * 0.12 + vec3(0.78, 0.84, 0.92) * frost * 0.75;
+         gl_FragColor = vec4(frostCol * gA + totalSpecular * (0.35 + drops * 0.25), gA);`,
       )
       .replace('#include <premultiplied_alpha_fragment>', '');
   };

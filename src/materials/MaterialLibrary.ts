@@ -119,10 +119,10 @@ export function createMaterials(tx: Textures, env: Environments) {
 
   // ------------------------------------------------------------ exterior
   const ext = {
-    concrete: std({ env: E.sky, envI: 0.55, maps: tx.concrete, tile: 4, color: '#f3efe8', roughness: 1, ns: 0.6 }),
+    concrete: std({ env: E.sky, envI: 0.5, maps: tx.concrete, tile: 4, color: '#d6d1c8', roughness: 1, ns: 0.6 }),
     concreteWarm: std({ env: E.sky, envI: 0.5, maps: tx.concrete, tile: 5, color: '#e9dfd0', roughness: 1 }),
-    limestone: std({ env: E.sky, envI: 0.5, maps: tx.limestone, tile: 2.4, color: '#ffffff', roughness: 1 }),
-    paving: std({ env: E.sky, envI: 0.55, maps: tx.travertine, tile: 1.6, color: '#f6efe4', roughness: 1 }),
+    limestone: std({ env: E.sky, envI: 0.45, maps: tx.limestone, tile: 2.4, color: '#ded5c7', roughness: 1 }),
+    paving: std({ env: E.sky, envI: 0.5, maps: tx.travertine, tile: 1.6, color: '#e3d9ca', roughness: 1 }),
     bronze: std({ env: E.sky, envI: 1.0, color: '#b89a74', metalness: 1, roughness: 0.32, maps: { orm: tx.brushed.orm, normalMap: tx.brushed.normalMap }, tile: 1 }),
     darkMetal: std({ env: E.sky, envI: 0.9, color: '#2a2a2b', metalness: 0.9, roughness: 0.38 }),
     facadeGlass: glass({ env: E.sky, envI: 1.0, tint: '#cfdcd9', opacity: 0.1 }),
@@ -134,11 +134,12 @@ export function createMaterials(tx: Textures, env: Environments) {
     foliageNear: std({ env: E.sky, envI: 0.45, vertexColors: true, roughness: 0.7, side: DoubleSide }),
     bark: std({ env: E.sky, envI: 0.3, maps: tx.bark, tile: 1.2, color: '#b7a894', roughness: 0.95 }),
     rockFar: std({ env: E.sky, envI: 0.3, vertexColors: true, roughness: 0.95, far: true }),
+    cliffStone: std({ env: E.sky, envI: 0.35, maps: tx.rock, tile: 7, color: '#b3a893', roughness: 1, ns: 1.2 }),
   };
 
   // ------------------------------------------------------------ interiors (hotel & penthouse)
   const int = {
-    marbleFloor: std({ env: E.interior, envI: 0.9, maps: tx.marbleTiles, tile: 2.4, roughness: 1, ns: 0.5 }),
+    marbleFloor: std({ env: E.interior, envI: 0.85, maps: tx.marbleTiles, tile: 2.4, color: '#dcd6cc', roughness: 1, ns: 0.5 }),
     marbleWall: std({ env: E.interior, envI: 0.8, maps: tx.marbleWhite, tile: 2.2, roughness: 1 }),
     marbleDark: phys({ env: E.interior, envI: 1.0, maps: tx.marbleDark, tile: 2.0, roughness: 1, clearcoat: 0.6, clearcoatRoughness: 0.08 }),
     travertine: std({ env: E.interior, envI: 0.65, maps: tx.travertine, tile: 1.6, roughness: 1, ns: 0.8 }),
@@ -146,7 +147,7 @@ export function createMaterials(tx: Textures, env: Environments) {
     oak: std({ env: E.interior, envI: 0.75, maps: tx.oak, tile: 2.4, roughness: 1, ns: 0.6 }),
     oakLight: std({ env: E.interior, envI: 0.6, maps: tx.oak, tile: 3.6, color: '#f1e6d6', roughness: 1 }),
     walnut: phys({ env: E.interior, envI: 0.8, maps: tx.walnut, tile: 1.4, roughness: 1, clearcoat: 0.35, clearcoatRoughness: 0.2 }),
-    plaster: std({ env: E.interior, envI: 0.6, maps: tx.plaster, tile: 3, color: '#f4efe7', roughness: 1, ns: 0.5 }),
+    plaster: std({ env: E.interior, envI: 0.95, maps: tx.plaster, tile: 3, color: '#ece6dc', roughness: 1, ns: 0.5 }),
     plasterWarm: std({ env: E.interior, envI: 0.55, maps: tx.plaster, tile: 3, color: '#e8dccb', roughness: 1 }),
     linenIvory: std({ env: E.interior, envI: 0.5, maps: tx.linen, tile: 0.5, color: '#ece5d8', roughness: 1 }),
     linenSand: std({ env: E.interior, envI: 0.5, maps: tx.linen, tile: 0.5, color: '#cdbca3', roughness: 1 }),
